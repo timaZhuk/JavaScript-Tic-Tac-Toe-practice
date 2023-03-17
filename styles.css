@@ -1,0 +1,68 @@
+/*
+The ::after selector inserts something after the content of each selected element(s).
+Use the content property to specify the content to insert.
+Use the ::before selector to insert something before the content
+*/
+*,*::after, *::before{
+    box-sizing:border-box;
+}
+
+/* ':root' find the root elemnt and we can assign variables */
+:root {
+    --cell-size:100px;  /*create variable in root element*/
+    --mark-size: cal(var(--cell-size)*0.9); /*calculate size of marks*/
+}
+
+body{
+    margin:0;
+}
+
+.board{
+    width:100vw;  /* spread div on all width of screen*/
+    height:100vh; /* spread div on all height of screen*/
+    display:grid;
+    justify-content:center; /*  */
+    align-content: center;
+    grid-template-columns:repeat(3,auto);
+    /* for items inside grid boxes*/
+    justify-items:center;
+    align-items:center;
+}
+.cell{
+    border: 1px solid red;
+    width:var(--cell-size);
+    height:var(--cell-size);
+    
+   
+}
+
+/* Delete the top borders */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top:none;
+}
+
+/* Delete the left borders of 1, 4,7 cells */
+.cell:nth-child(3n+1){
+    border-left:none;
+}
+
+/* Delete the right borders of 3, 6,9 cells */
+.cell:nth-child(3n+3){
+    border-right:none;
+}
+
+/* Delete the bottom-borders */
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7){
+    border-bottom:none;
+}
+.cell.x::before,
+.cell.x::after{
+    content:'';
+    width:calc(var(--mark-size)*.15);
+}
+
+
