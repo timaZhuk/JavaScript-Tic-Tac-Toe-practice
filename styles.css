@@ -10,7 +10,7 @@ Use the ::before selector to insert something before the content
 /* ':root' find the root elemnt and we can assign variables */
 :root {
     --cell-size:100px;  /*create variable in root element*/
-    --mark-size: cal(var(--cell-size)*0.9); /*calculate size of marks*/
+    --mark-size: calc(var(--cell-size)*0.9); /*calculate size of marks*/
 }
 
 body{
@@ -32,6 +32,11 @@ body{
     border: 1px solid red;
     width:var(--cell-size);
     height:var(--cell-size);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    cursor:pointer;
     
    
 }
@@ -59,10 +64,114 @@ body{
 .cell:nth-child(7){
     border-bottom:none;
 }
+
+.cell.x,
+.cell.circle{
+    cursor:not-allowed;
+}
 .cell.x::before,
-.cell.x::after{
-    content:'';
-    width:calc(var(--mark-size)*.15);
+.cell.x::after,
+.cell.circle::before,
+.cell.circle::after
+{
+        background-color: black;
+    }
+
+
+
+/* if we have class= "x" in div with class="border" and when we hover to the cell */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after
+{
+    background-color: lightgray;
 }
 
 
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,/* whernever we hover on cell (wnen X turn) we apply this*/
+.board.x .cell:not(.x):not(.circle):hover::after /*not(.x):not(.circle) not applied to cell with these classes*/
+{
+    content:'';
+    width:calc(var(--mark-size)*.15);
+    height:var(--mark-size);
+    position:absolute;
+    
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before
+{
+    transform:rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+    transform:rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after
+{
+    content:'';
+    position:absolute;
+    border-radius:50%;
+   
+    
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    width:var(--mark-size);
+    height:var(--mark-size);
+   
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    width:calc(var(--mark-size)*0.7);
+    height:calc(var(--mark-size)*0.7);
+    background-color: white;
+}
+
+.winning-message{
+    display:none;
+    position:fixed;
+    top:0;
+    right:0;
+
+    left:0;
+    bottom:0;
+    background-color: rgba(0, 0, 0,.9);
+    /* positioning button*/
+    
+    justify-content: center;
+    align-items:center;
+    color:white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+.winning-message button{
+    font-size:3rem;
+    background-color: white;
+    border: 1px solid black;
+    padding:0.25rem 0.5rem;
+}
+
+.winning-message button:hover{
+    background-color: black;
+    color:white;
+    border-color:white;
+}
+
+/*  class="show" in div with class="winning-message" then ouer win massage apears */
+/* <div class="winning-message show" id="winningMessage"> */
+winning-message.show{
+    display:flex;
+}

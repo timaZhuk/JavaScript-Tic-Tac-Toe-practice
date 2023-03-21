@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
-    <!-- defer attribute controls that at first being downloded HTML tree then execute js file  -->
+    <!-- defer attribute controls that HTML is downlode then it is starting execute js file  -->
     <title>TicTacToe</title>
 </head>
 <body>
     <!-- create board div id for JS class for CSS -->
     <div class="board" id="board">
-        <div class="cell x" data-cell>1</div>
-        <div class="cell" data-cell>2</div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell>O</div>
         <div class="cell" data-cell>3</div>
         <div class="cell" data-cell>4</div>
         <div class="cell" data-cell>5</div>
@@ -27,5 +27,6 @@
         <div class="data-winning-message-text"></div>
         <button id="restsrtButton">Restart</button>
     </div>
+
 </body>
 </html>
